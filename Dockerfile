@@ -33,6 +33,8 @@ ENV LANGUAGE en_US:de
 ENV LC_ALL en_US.UTF-8  
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ./fonts/* /usr/share/fonts/
+RUN fc-cache -fv && fc-list
 
 # Expose 3000
 EXPOSE 3000
