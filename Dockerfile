@@ -4,7 +4,7 @@ COPY . /unoconv-api
 RUN go build
 
 
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 
 LABEL maintainer="kaufmann.r@gmail.com"
 
@@ -18,17 +18,19 @@ RUN \
 		apt-get install -y \
 		        locales \
 			unoconv \
-			supervisor && \
+			supervisor \
+            fonts-dejavu fonts-lato fonts-lmodern ttf-dejavu ttf-unifont ttf-freefont ttf-liberation \
+            && \
         apt-get remove -y && \
 	    apt-get autoremove -y && \
         apt-get clean && \
 			rm -rf /var/lib/apt/lists/
 
 # Set the locale
-RUN locale-gen de_DE.UTF-8  
-ENV LANG de_DE.UTF-8  
-ENV LANGUAGE de_DE:de  
-ENV LC_ALL de_DE.UTF-8  
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:de  
+ENV LC_ALL en_US.UTF-8  
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
